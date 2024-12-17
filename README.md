@@ -1,8 +1,8 @@
-WEATHER INFORMATION NEWS Frontend
+#WEATHER INFORMATION NEWS Frontend
 
 This repository contains the frontend code for a weather information and news web application, developed using Svelte and Vite.
 
-Features
+##Features
 	•	City Weather Forecast: Retrieve 5-day weather forecasts for a specific city.
 	•	Animated Backgrounds: Dynamic GIF backgrounds based on weather conditions.
 	•	Automatic Data Updates: Weather information updates every 5 seconds for smooth browsing.

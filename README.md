@@ -1,14 +1,17 @@
-# Svelte + Vite
+# Wetter-Informations-News
 
 This template should help get you started developing with Svelte in Vite.
+
+## Features
+
+City Weather Forecast: Retrieve 5-day weather forecasts for a specific city.
+Animated Backgrounds: Dynamic GIF backgrounds based on weather conditions.
+Automatic Data Updates: Weather information updates every 5 seconds for smooth browsing.
+Error Handling: Provides meaningful error messages if the city is not found or no data is available.
 
 ## Recommended IDE Setup
 
 [VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
-
-## Need an official Svelte framework?
-
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
 
 ## Technical considerations
 
@@ -42,7 +45,8 @@ If you have state that's important to retain within a component, consider creati
 ```js
 // store.js
 // An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+import { writable } from "svelte/store";
+export default writable(0);
 ```
+
 # win-frontend

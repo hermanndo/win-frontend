@@ -74,6 +74,13 @@
     }
   }
 
+  function capitalizeDescription(description) {
+    return description
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+
   const gifMapping = {
     "01d": "https://media.giphy.com/media/VHf2YBdIm7GsyRzwVZ/giphy.gif",
     "01n": "https://media.giphy.com/media/VHf2YBdIm7GsyRzwVZ/giphy.gif",
@@ -131,7 +138,9 @@
         {Math.round(weatherData.list[currentIndex].main.temp)} °
       </p>
       <p class="description">
-        {weatherData.list[currentIndex].weather[0].description}
+        {capitalizeDescription(
+          weatherData.list[currentIndex].weather[0].description
+        )}
       </p>
       <p class="min-max-temp">
         Min: {Math.round(weatherData.list[currentIndex].main.temp_min)} °C | Max:

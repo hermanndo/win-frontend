@@ -165,7 +165,7 @@
     font-family: "Univia Pro", "Regular", Arial, Helvetica, sans-serif;
     color: #04bdc6;
     padding: 20px;
-    background-size: cover;
+    background-size: auto 100%;
     background-position: center;
     background-repeat: no-repeat;
   }
@@ -179,7 +179,6 @@
     text-align: center;
     max-width: 100%;
     padding: 0 10px;
-    overflow-wrap: anywhere;
   }
 
   .search-bar {
@@ -232,7 +231,7 @@
   }
 
   .weather-card h2 {
-    font-size: 8em;
+    font-size: 6em;
     color: #04bdc6;
     margin-bottom: -50px; /* Weniger Abstand zum Datum */
     margin-top: -5px;
@@ -258,7 +257,7 @@
     font-weight: bold;
     color: #fff;
     font-size: 3em;
-    margin-bottom: -30px;
+    margin-bottom: -20px;
   }
 
   .weather-card .wind-speed {

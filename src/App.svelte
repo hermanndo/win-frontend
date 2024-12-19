@@ -205,6 +205,7 @@
   .search-bar input {
     padding: 10px;
     font-size: 1.5em;
+    color: black;
     border: 2px solid #04bdc6;
     border-radius: 10px;
     width: 70%;

@@ -8,16 +8,21 @@
   let errorMessage = null;
   let loading = false;
   let intervalId = null;
+  let output = '';
+  let days = 5;
 
   async function fetchWeather() {
     if (loading) return;
     loading = true;
     errorMessage = null;
 
-    const apiKey = "18337e34d4e093fb8e81ae9c1f8af5e0";
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`
-    );
+      `http://localhost:8080/api/weather/${city}?days=${days}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+      },
+    });
 
     if (!response.ok) {
       errorMessage = "City does not exist or no data available";
@@ -28,7 +33,7 @@
 
     const data = await response.json();
 
-    if (!data.list || data.list.length === 0) {
+    if (!data || data.length === 0) {
       errorMessage = "City does not exist or no data available";
       weatherData = null;
       loading = false;
@@ -38,9 +43,9 @@
     const dailyData = [];
     const seenDates = new Set();
 
-    for (let i = data.list.length - 1; i >= 0; i--) {
-      const entry = data.list[i];
-      const date = new Date(entry.dt * 1000).toLocaleDateString();
+    for (let i = data.length - 1; i >= 0; i--) {
+      const entry = data[i];
+      const date = new Date(entry.forecastDate).toLocaleDateString();
 
       if (!seenDates.has(date)) {
         seenDates.add(date);
@@ -49,11 +54,11 @@
     }
 
     await tick();
-    weatherData = { ...data, list: dailyData };
+    weatherData = { list: dailyData };
     loading = false;
     currentIndex = 0;
 
-    if (intervalId) {
+    if (intervalId != null) {
       clearInterval(intervalId);
     }
 
@@ -107,7 +112,7 @@
     return gifUrl || "";
   }
 
-  $: gifUrl = getWeatherGif(weatherData?.list[currentIndex]?.weather[0]?.icon);
+  $: gifUrl = getWeatherGif(weatherData?.list[currentIndex]?.iconCode);
 </script>
 
 <main style="background-image: url('{gifUrl}');">
@@ -128,33 +133,33 @@
 
   {#if weatherData && !loading}
     <div class="weather-card" transition:fade>
-      <h2>{weatherData.city.name}</h2>
+      <h2>{weatherData.city}</h2>
       <p class="date">
         {new Date(
-          weatherData.list[currentIndex].dt * 1000
+          weatherData.list[currentIndex].forecastDate
         ).toLocaleDateString()}
       </p>
       <p class="temp">
-        {Math.round(weatherData.list[currentIndex].main.temp)} °
+        {Math.round(weatherData.list[currentIndex].temperature)} °
       </p>
       <p class="description">
         {capitalizeDescription(
-          weatherData.list[currentIndex].weather[0].description
+          weatherData.list[currentIndex].description
         )}
       </p>
       <p class="min-max-temp">
-        Min: {Math.round(weatherData.list[currentIndex].main.temp_min)} °C | Max:
-        {Math.round(weatherData.list[currentIndex].main.temp_max)} °C
+        Min: {Math.round(weatherData.list[currentIndex].minTemperature)} °C | Max:
+        {Math.round(weatherData.list[currentIndex].maxTemperature)} °C
       </p>
       <p class="feels-like">
-        Feels Like: {Math.round(weatherData.list[currentIndex].main.feels_like)}
+        Feels Like: {Math.round(weatherData.list[currentIndex].feelsLike)}
         °C
       </p>
       <p class="pressure">
-        Pressure: {weatherData.list[currentIndex].main.pressure} hPa
+        Pressure: {weatherData.list[currentIndex].pressure} hPa
       </p>
       <p class="wind-speed">
-        Wind Speed: {weatherData.list[currentIndex].wind.speed} m/s
+        Wind Speed: {weatherData.list[currentIndex].windSpeed} m/s
       </p>
     </div>
   {/if}

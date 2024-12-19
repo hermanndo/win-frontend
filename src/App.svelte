@@ -148,18 +148,17 @@
         )}
       </p>
       <p class="min-max-temp">
-        Min: {Math.round(weatherData.list[currentIndex].minTemperature)} °C | Max:
-        {Math.round(weatherData.list[currentIndex].maxTemperature)} °C
+        Min: <color>{Math.round(weatherData.list[currentIndex].minTemperature)} °C</color> | Max:
+        <color>{Math.round(weatherData.list[currentIndex].maxTemperature)} °C</color>
       </p>
       <p class="feels-like">
-        Gefühlt: {Math.round(weatherData.list[currentIndex].feelsLike)}
-        °C
+        Gefühlt: <color>{Math.round(weatherData.list[currentIndex].feelsLike)} °C</color>
       </p>
       <p class="pressure">
-        Luftdruck: {weatherData.list[currentIndex].pressure} hPa
+        Luftdruck: <color>{weatherData.list[currentIndex].pressure} hPa</color>
       </p>
       <p class="wind-speed">
-        Windgeschwindigkeit: {weatherData.list[currentIndex].windSpeed}m/s
+        Windgeschwindigkeit: <color>{weatherData.list[currentIndex].windSpeed} m/s</color>
       </p>
     </div>
   {/if}
@@ -272,6 +271,10 @@
     color: #fff;
     font-size: 3em;
     margin-bottom: -20px;
+  }
+
+  .weather-card color {
+    color: #04bdc6
   }
 
   .weather-card .wind-speed {

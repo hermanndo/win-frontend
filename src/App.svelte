@@ -116,15 +116,15 @@
 </script>
 
 <main style="background-image: url('{gifUrl}');">
-  <h1 class="app-title">WEATHER INFORMATION NEWS</h1>
+  <h1 class="app-title">WETTER INFORMATIONS NEWS</h1>
   <div class="search-bar">
     <input
       type="text"
       bind:value={city}
-      placeholder="Enter City Name"
+      placeholder="Stadtname eingeben"
       on:keyup={handleKeyup}
     />
-    <button on:click={fetchWeather}>Search</button>
+    <button on:click={fetchWeather}>Suchen</button>
   </div>
 
   {#if errorMessage}
@@ -133,7 +133,7 @@
 
   {#if weatherData && !loading}
     <div class="weather-card" transition:fade>
-      <h2>{weatherData.city}</h2>
+      <h2>{weatherData.list[currentIndex].city}</h2>
       <p class="date">
         {new Date(
           weatherData.list[currentIndex].forecastDate
@@ -152,20 +152,20 @@
         {Math.round(weatherData.list[currentIndex].maxTemperature)} °C
       </p>
       <p class="feels-like">
-        Feels Like: {Math.round(weatherData.list[currentIndex].feelsLike)}
+        Gefühlt: {Math.round(weatherData.list[currentIndex].feelsLike)}
         °C
       </p>
       <p class="pressure">
-        Pressure: {weatherData.list[currentIndex].pressure} hPa
+        Luftdruck: {weatherData.list[currentIndex].pressure} hPa
       </p>
       <p class="wind-speed">
-        Wind Speed: {weatherData.list[currentIndex].windSpeed} m/s
+        Windgeschwindigkeit: {weatherData.list[currentIndex].windSpeed}m/s
       </p>
     </div>
   {/if}
 
   {#if loading}
-    <p class="loading-message">Loading...</p>
+    <p class="loading-message">Lädt...</p>
   {/if}
 </main>
 

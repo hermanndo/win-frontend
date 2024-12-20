@@ -140,7 +140,7 @@
         ).toLocaleDateString()}
       </p>
       <p class="temp">
-        {Math.round(weatherData.list[currentIndex].temperature)} °
+        {Math.round(weatherData.list[currentIndex].temperature)}°
       </p>
       <p class="description">
         {capitalizeDescription(
@@ -175,7 +175,7 @@
     align-items: center;
     justify-content: flex-start;
     height: 100vh;
-    font-family: "Univia Pro", "Regular", Arial, Helvetica, sans-serif;
+    font-family: "Univia Pro", Arial, Helvetica, sans-serif;
     color: #04bdc6;
     padding: 20px;
     background-size: auto 100%;

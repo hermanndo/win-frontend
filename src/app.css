@@ -1,5 +1,4 @@
 :root {
-  font-family: "Univia Pro", "Regular", Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -10,7 +9,6 @@
 
 body {
   margin: 0;
-  font-family: "Univia Pro", "Regular", Arial, Helvetica, sans-serif;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -22,7 +20,12 @@ body {
 
 #app {
   text-align: center;
-  font-family: "Univia Pro", "Regular", Arial, Helvetica, sans-serif;
 }
 
+@font-face {
+  font-family: "Univia Pro";
+  src: url("/Users/jakobr/LWS/VisualStudioCode-Docs/win-frontend/src/assets/UniviaPro-Regular.ttf") format("woff2"),
+       url("/Users/jakobr/LWS/VisualStudioCode-Docs/win-frontend/src/assets/UniviaPro-Regular.woff") format("woff"),
+       url("/Users/jakobr/LWS/VisualStudioCode-Docs/win-frontend/src/assets/UniviaPro-Regular.ttf") format("truetype");
+}
 

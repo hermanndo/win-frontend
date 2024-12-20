@@ -10,6 +10,7 @@
   let intervalId = null;
   let output = '';
   let days = 5;
+  let backgroundGif = null;
 
   async function fetchWeather() {
     if (loading) return;
@@ -87,32 +88,37 @@
   }
 
   const gifMapping = {
-    "01d": "https://media.giphy.com/media/VHf2YBdIm7GsyRzwVZ/giphy.gif",
-    "01n": "https://media.giphy.com/media/VHf2YBdIm7GsyRzwVZ/giphy.gif",
-    "02d": "https://media.giphy.com/media/3ohs4uJC1G9NNq03fi/giphy.gif",
-    "02n": "https://media.giphy.com/media/3ohs4uJC1G9NNq03fi/giphy.gif",
-    "03d": "https://media.giphy.com/media/0Styincf6K2tvfjb5Q/giphy.gif",
-    "03n": "https://media.giphy.com/media/0Styincf6K2tvfjb5Q/giphy.gif",
-    "04d": "https://media.giphy.com/media/GFXNdR1tuMopi/giphy.gif",
-    "04n": "https://media.giphy.com/media/GFXNdR1tuMopi/giphy.gif",
-    "09d": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif",
-    "09n": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif",
-    "10d": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif",
-    "10n": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif",
-    "11d": "https://media.giphy.com/media/13ZEwDgIZtK1y/giphy.gif",
-    "11n": "https://media.giphy.com/media/13ZEwDgIZtK1y/giphy.gif",
-    "13d": "https://media.giphy.com/media/KFUx0Rtz7p0HTzbJ7x/giphy.gif",
-    "13n": "https://media.giphy.com/media/KFUx0Rtz7p0HTzbJ7x/giphy.gif",
-    "50d": "https://media.giphy.com/media/McDhCoTyRyLiE/giphy.gif",
-    "50n": "https://media.giphy.com/media/McDhCoTyRyLiE/giphy.gif",
+    "01d": "https://media.giphy.com/media/VHf2YBdIm7GsyRzwVZ/giphy.gif", // klarer Himmel
+    "01n": "https://media.giphy.com/media/VHf2YBdIm7GsyRzwVZ/giphy.gif", // klarer Himmel
+    "02d": "https://media.giphy.com/media/3ohs4uJC1G9NNq03fi/giphy.gif", // einzelne Wolken
+    "02n": "https://media.giphy.com/media/3ohs4uJC1G9NNq03fi/giphy.gif", // einzelne Wolken
+    "03d": "https://media.giphy.com/media/0Styincf6K2tvfjb5Q/giphy.gif", // leicht bewölkt
+    "03n": "https://media.giphy.com/media/0Styincf6K2tvfjb5Q/giphy.gif", // leicht bewölkt
+    "04d": "https://media.giphy.com/media/GFXNdR1tuMopi/giphy.gif", // bedeckt
+    "04n": "https://media.giphy.com/media/GFXNdR1tuMopi/giphy.gif", // bedeckt
+    "09d": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif", // Regen
+    "09n": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif", // Regen
+    "10d": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif", // Regen
+    "10n": "https://media.giphy.com/media/26DMWExfbZSiV0Btm/giphy.gif", // Regen
+    "11d": "https://media.giphy.com/media/13ZEwDgIZtK1y/giphy.gif", // Gewitter
+    "11n": "https://media.giphy.com/media/13ZEwDgIZtK1y/giphy.gif", // Gewitter
+    "13d": "https://media.giphy.com/media/KFUx0Rtz7p0HTzbJ7x/giphy.gif", // Schnee
+    "13n": "https://media.giphy.com/media/KFUx0Rtz7p0HTzbJ7x/giphy.gif", // Schnee
+    "50d": "https://media.giphy.com/media/McDhCoTyRyLiE/giphy.gif", // Nebel
+    "50n": "https://media.giphy.com/media/McDhCoTyRyLiE/giphy.gif", // Nebel
   };
 
   function getWeatherGif(icon) {
     const gifUrl = gifMapping[icon];
     return gifUrl || "";
   }
+  let defaultGif = "https://media.giphy.com/media/J2b0mLWJx7L1EP9tB4/giphy.gif";
 
-  $: gifUrl = getWeatherGif(weatherData?.list[currentIndex]?.iconCode);
+  $: gifUrl = !city && !weatherData
+  ? defaultGif // Standard-GIF, wenn keine Eingabe oder Wetterdaten
+  : weatherData
+  ? getWeatherGif(weatherData.list[currentIndex]?.iconCode)
+  : ""; // Wetter-GIF oder kein GIF
 </script>
 
 <main style="background-image: url('{gifUrl}');">
